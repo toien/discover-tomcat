@@ -23,13 +23,14 @@ public class Response {
 	public void sendStaticResource() {
 		byte[] bytes = new byte[BUFFER_SIZE];
 
-		FileInputStream fis = null;
-
-		try {
-			File file = new File(HttpServer.WEB_ROOT, request.getUri());
-
+		File file = new File(HttpServer.WEB_ROOT, request.getUri());
+		try (FileInputStream fis = new FileInputStream(file)) {
 			if (file.exists()) {
-
+				int ch = fis.read(bytes, 0, BUFFER_SIZE);
+				while (ch != -1) {
+					output.write(bytes, 0, ch);
+					ch = fis.read(bytes, 0, BUFFER_SIZE);
+				}
 			} else {
 				// @formatter:off
 				String errorMsg = "HTTP/1.1 404 File Not Found\r\n" + 

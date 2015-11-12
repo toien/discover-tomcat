@@ -8,8 +8,8 @@ import java.net.ServerSocket;
 import java.net.Socket;
 
 public class HttpServer {
-	public static final String WEB_ROOT = "";
-	public static final String SHUTDOWN_COMMAND = "";
+	public static final String WEB_ROOT = "D:/Develop Tools/apache-tomcat-8.0.23/webapps/ROOT";
+	public static final String SHUTDOWN_COMMAND = "shutdown";
 
 	private boolean shutdown = false;
 	private String host = "localhost";
@@ -39,6 +39,7 @@ public class HttpServer {
 				request.parse();
 				
 				Response response = new Response(output);
+				response.setRequest(request);
 				response.sendStaticResource();
 				
 				socket.close();
@@ -53,6 +54,7 @@ public class HttpServer {
 	}
 
 	public static void main(String[] args) {
-
+		HttpServer server = new HttpServer();
+		server.await();
 	}
 }
