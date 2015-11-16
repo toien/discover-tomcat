@@ -1,6 +1,7 @@
 package ch2;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 
 import javax.servlet.Servlet;
 import javax.servlet.ServletConfig;
@@ -12,33 +13,33 @@ public class PrimitiveServlet implements Servlet {
 
 	@Override
 	public void destroy() {
-		// TODO Auto-generated method stub
-		
+		System.out.println("destroy");
 	}
 
 	@Override
 	public ServletConfig getServletConfig() {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
 	public String getServletInfo() {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
 	public void init(ServletConfig servletConfig) throws ServletException {
-		System.out.println();
-		
+		System.out.println("init");
+
 	}
 
 	@Override
 	public void service(ServletRequest request, ServletResponse response) throws ServletException,
 			IOException {
-		// TODO Auto-generated method stub
-		
+
+		System.out.println("from service");
+		PrintWriter out = response.getWriter();
+		out.print("Hello, roses are red.");
+		out.print("Violets are blue.");
 	}
 
 }
