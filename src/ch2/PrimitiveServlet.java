@@ -38,8 +38,8 @@ public class PrimitiveServlet implements Servlet {
 
 		System.out.println("from service");
 		PrintWriter out = response.getWriter();
-		out.print("Hello, roses are red.");
-		out.print("Violets are blue.");
+		out.println("Hello, roses are red.");
+		out.println("Violets are blue.");
 	}
 
 }

@@ -26,25 +26,22 @@ public class HttpServer {
 		}
 
 		while (!shutdown) {
-			Socket socket = null;
-			InputStream input = null;
-			OutputStream output = null;
 
-			try {
-				socket = serverSocket.accept();
-				input = socket.getInputStream();
-				output = socket.getOutputStream();
+			try (Socket socket = serverSocket.accept();
+					InputStream input = socket.getInputStream();
+					OutputStream output = socket.getOutputStream();) {
 
 				Request request = new Request(input);
 				request.parse();
-				
-				Response response = new Response(output);
-				response.setRequest(request);
-				response.sendStaticResource();
-				
-				socket.close();
-				
-				shutdown = request.getUri().equals(SHUTDOWN_COMMAND);
+
+				if (request.getUri() != null) {
+					Response response = new Response(output);
+					response.setRequest(request);
+					response.sendStaticResource();
+
+					shutdown = request.getUri().equals(SHUTDOWN_COMMAND);
+				}
+
 			} catch (IOException re) {
 				re.printStackTrace();
 				continue;

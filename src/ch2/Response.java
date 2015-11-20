@@ -30,7 +30,7 @@ public class Response implements ServletResponse {
 	public void sendStaticResource() {
 		byte[] bytes = new byte[BUFFER_SIZE];
 
-		File file = new File(HttpServer.WEB_ROOT, request.getUri());
+		File file = new File(Constants.WEB_ROOT, request.getUri());
 		try (FileInputStream fis = new FileInputStream(file)) {
 			if (file.exists()) {
 				int ch = fis.read(bytes, 0, BUFFER_SIZE);

@@ -7,9 +7,8 @@ import java.net.InetAddress;
 import java.net.ServerSocket;
 import java.net.Socket;
 
-
 public class HttpServer {
-	public static final String WEB_ROOT = "D:/Develop Tools/apache-tomcat-8.0.23/webapps/ROOT";
+	
 	public static final String SHUTDOWN_COMMAND = "shutdown";
 
 	private boolean shutdown = false;
@@ -27,37 +26,35 @@ public class HttpServer {
 		}
 
 		while (!shutdown) {
-			Socket socket = null;
-			InputStream input = null;
-			OutputStream output = null;
 
-			try {
-				socket = serverSocket.accept();
-				input = socket.getInputStream();
-				output = socket.getOutputStream();
+			try (Socket socket = serverSocket.accept();
+					InputStream input = socket.getInputStream();
+					OutputStream output = socket.getOutputStream();) {
 
 				Request request = new Request(input);
 				request.parse();
-
-				Response response = new Response(output);
-				response.setRequest(request);
-
-				if (request.getUri().startsWith("/servlet/")) {
-					ServletProcessor processor = new ServletProcessor();
-					processor.process(request, response);
-				} else {
-					StaticResourceProcessor processor = new StaticResourceProcessor();
-					processor.process(request, response);
+				
+				if (request.getUri() != null) {
+					Response response = new Response(output);
+					response.setRequest(request);
+					
+					if (request.getUri().startsWith("/servlet/")) {
+						ServletProcessor processor = new ServletProcessor();
+						processor.process(request, response);
+					} else {
+						StaticResourceProcessor processor = new StaticResourceProcessor();
+						processor.process(request, response);
+					}
+					shutdown = request.getUri().equals(SHUTDOWN_COMMAND);
 				}
 
-				socket.close();
-
-				shutdown = request.getUri().equals(SHUTDOWN_COMMAND);
-			} catch (IOException re) {
+			} catch (IOException e) {
+				e.printStackTrace();
+				continue;
+			} catch (RuntimeException re) {
 				re.printStackTrace();
 				continue;
-			}
-
+			} 
 		}
 	}
 
