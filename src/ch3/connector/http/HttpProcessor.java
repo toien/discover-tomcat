@@ -1,9 +1,9 @@
-package ch3.http.processor;
+package ch3.connector.http;
 
 import java.io.IOException;
 import java.net.Socket;
 
-import ch3.http.connector.HttpConnector;
+import ch3.connector.http.connector.HttpConnector;
 
 public class HttpProcessor {
 	

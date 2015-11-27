@@ -1,11 +1,11 @@
-package ch3.http.connector;
+package ch3.connector.http;
 
 import java.io.IOException;
 import java.net.InetAddress;
 import java.net.ServerSocket;
 import java.net.Socket;
 
-import ch3.http.processor.HttpProcessor;
+import ch3.connector.http.processor.HttpProcessor;
 
 public class HttpConnector implements Runnable {
 

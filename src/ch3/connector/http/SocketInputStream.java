@@ -1,4 +1,4 @@
-package ch3.http.connector;
+package ch3.connector.http;
 
 import java.io.IOException;
 import java.io.InputStream;
