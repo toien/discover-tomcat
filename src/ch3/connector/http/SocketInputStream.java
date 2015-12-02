@@ -3,14 +3,16 @@ package ch3.connector.http;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.EOFException;
-import org.apache.catalina.util.StringManager;
+
+import org.apache.tomcat.util.res.StringManager;
+
+import ch3.Constants;
 
 /**
  * Extends InputStream to be more efficient reading lines during HTTP header
  * processing.
  *
  * @author <a href="mailto:remm@apache.org">Remy Maucherat</a>
- * @deprecated
  */
 public class SocketInputStream extends InputStream {
 

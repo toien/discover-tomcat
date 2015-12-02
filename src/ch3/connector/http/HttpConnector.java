@@ -5,8 +5,6 @@ import java.net.InetAddress;
 import java.net.ServerSocket;
 import java.net.Socket;
 
-import ch3.connector.http.processor.HttpProcessor;
-
 public class HttpConnector implements Runnable {
 
 	boolean stopped;
