@@ -4,7 +4,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.EOFException;
 
-import org.apache.tomcat.util.res.StringManager;
+import org.apache.catalina.util.StringManager;
 
 import ch3.Constants;
 

@@ -9,7 +9,8 @@ import java.io.IOException;
 import javax.servlet.ReadListener;
 import javax.servlet.ServletInputStream;
 
-import org.apache.tomcat.util.res.StringManager;
+import org.apache.catalina.util.StringManager;
+
 
 /**
  * Convenience implementation of <b>ServletInputStream</b> that works with the

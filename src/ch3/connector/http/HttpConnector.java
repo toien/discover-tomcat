@@ -8,7 +8,9 @@ import java.net.Socket;
 public class HttpConnector implements Runnable {
 
 	boolean stopped;
+	
 	String schema = "http";
+	int port = 8080;
 
 	public String getSchema() {
 		return schema;
@@ -16,7 +18,6 @@ public class HttpConnector implements Runnable {
 
 	@Override
 	public void run() {
-		int port = 8080;
 
 		try (ServerSocket serverSocket = new ServerSocket(port, 1,
 				InetAddress.getByName("127.0.0.1"))) {
